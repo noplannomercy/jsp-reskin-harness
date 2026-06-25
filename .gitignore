@@ -1,0 +1,14 @@
+# 작업 산출 (소스 도착 후 생성, 커밋 대상 아님)
+work/
+reports/screenshots/
+recon/recon-report.json
+
+# 레거시 원본/납품물은 별도 관리 (여기 커밋 안 함)
+src/
+deliverables/
+
+# 노이즈
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
