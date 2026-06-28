@@ -191,7 +191,7 @@ const lensResults = await parallel(
   )
 )
 
-const ok = lensResults.filter(Boolean)
+const ok = lensResults.filter(x => x && x.result)
 log(`렌즈 ${ok.length}/4 완료`)
 
 // ── Phase 2: 합성 ──
@@ -237,6 +237,11 @@ JSP 옷입히기(grafting) 작업이 바로 참조할 "구조 정찰 리포트 +
 - decisions: ① 공유 chrome 선처리 대상 ② charset 대응 ③ 보존필수 동적 태그 목록.
 - perPageRisk: 페이지별 난이도 + grafting 시 조심할 점.
 - openQuestions: 소스만으론 못 정한 것(매핑/타겟브라우저 등) — 사람 확인용.
+
+★저장: 구조화 출력으로 반환하기 전에, Write 도구로 산출을 파일로 남겨라.
+  - recon/recon-report.json  ← 통합 결과(JSON 전체)
+  - recon/recon-report.md    ← reportMarkdown (사람이 읽는 통합 리포트)
+  (이 정찰만 READ-ONLY 예외 — src/는 절대 안 건드리고, recon/ 에만 쓴다.)
 
 렌즈 결과:
 ${JSON.stringify(ok, null, 2)}`,

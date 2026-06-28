@@ -48,7 +48,7 @@
 
 1. `INSTALL.md` 보고 툴셋 설치 (context7 + gstack).
 2. 소스 도착 → `src/`·`deliverables/`(납품물 + `mapping.csv`) 채움.
-3. `workflows/recon-request-template.md`에 경로 채워 **정찰 1회** → `recon/recon-report.json`.
+3. `workflows/recon-request-template.md`에 경로 채워 **정찰 1회** → 결과 JSON을 `recon/recon-report.json`으로 저장.
 4. `WORKFLOW.md`의 `R → E → C → 페이지루프` 그대로 진행.
 5. 물량 크면 `grafting-fanout-structure.md`의 ② 팬아웃으로 escalation.
 

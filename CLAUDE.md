@@ -3,12 +3,12 @@
 ## 작업 시작 전
 
 - 이 파일 → `WORKFLOW.md`(작업 시퀀스) → `INSTALL.md`(툴셋) 순으로 읽어라.
-- **소스 도착 전**(현재): `workflows/recon-request-template.md`로 정찰 준비만. 추측 코딩 금지.
+- **소스 도착 전**: `workflows/recon-request-template.md`로 정찰 준비만. 추측 코딩 금지.
 - **소스 도착 후**: `WORKFLOW.md`의 `R → E → C → 페이지루프` 순서 그대로.
 
 ## 개요
 
-공제업체(세종) 레거시 JSP에, 타 업체가 만든 정적 퍼블리싱(HTML+CSS)을 **동적 바인딩 보존한 채 입히는** 작업. 인사 화면 ≤15장, 2개월. 신규개발 아님. **현재 소스 도착 전 준비 단계.**
+공제업체(세종) 레거시 JSP에, 타 업체가 만든 정적 퍼블리싱(HTML+CSS)을 **동적 바인딩 보존한 채 입히는** 작업. 인사 화면 ≤15장, 2개월. 신규개발 아님.
 
 ## 제약 사항 (강제)
 
@@ -29,7 +29,7 @@
 
 - 레거시 **JSP + 구버전 Spring Boot + Oracle**. JSTL/커스텀태그. charset **EUC-KR 가능성**.
 - 하네스: **context7 MCP** / **gstack**(`/qa`·`/browse`·`/review`) / **git**.
-- 안 씀(이 작업엔 오버): graphify · grill · SQLcl · design-review · frontend-design · /ship.
+- 안 씀(이 작업엔 오버): graphify · grill · SQLcl · design-review · frontend-design · /ship · superpowers 풀코스(설계·TDD 불필요). 단 버그 안 잡힐 때 `systematic-debugging`만 escalation.
 
 ## 구조
 
