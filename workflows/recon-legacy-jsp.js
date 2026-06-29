@@ -20,7 +20,8 @@ ${TARGETS
   : '재skin 대상 페이지는 아직 미지정 — 넓게 인벤토리하고 후보를 플래그.'}
 
 규칙:
-- READ-ONLY. 파일 편집/생성/삭제 금지. Glob/Grep/Read만 사용.
+- READ-ONLY. 파일 편집/생성/삭제 금지. 비파괴 조사만 (Glob/Grep/Read + charset 확인용 `file`/hexdump 같은 읽기 전용 명령 허용).
+- charset은 inventory 렌즈(④)가 실제 바이트로 최종판단 — 다른 렌즈는 선언 기준 언급만, 단정 금지.
 - 이 정찰은 후속작업을 위한 것: 납품된 정적 HTML+CSS 디자인을 이 JSP들에 입히되
   동적 바인딩을 보존하는 grafting. 그래서 초점은 "마크업 갈아끼우기 전에 반드시
   이해/보존해야 할 것".
@@ -173,8 +174,11 @@ const LENSES = [
     prompt: `${COMMON}
 
 렌즈 ④: 페이지 인벤토리 + charset/버전.
-- 대상 JSP(미지정이면 전체 .jsp) 목록화. 각 페이지: charset(EUC-KR/UTF-8), 스크립틀릿 유무,
+- 대상 JSP(미지정이면 전체 .jsp) 목록화. 각 페이지: charset, 스크립틀릿 유무,
   커스텀태그 유무, include 목록, grafting 난이도(low/medium/high).
+- ★charset은 선언부(page contentType/pageEncoding/<meta>)만 믿지 말 것. `file`/hexdump로 실제
+  파일 바이트 인코딩을 확인하라. 선언≠실제면 둘 다 기록(예: "선언 EUC-KR / 실제 UTF-8").
+  한글깨짐의 진짜 원인은 실제 바이트 vs 납품 HTML(보통 UTF-8) 불일치다.
 - 프로젝트 전체 charset, JSTL/Java/Servlet-JSP 버전을 web.xml·pom.xml·build.gradle·*.jsp 헤더에서 탐지.
 - 목표: charset 한글깨짐 지뢰 사전탐지 + 페이지별 난이도 분류(작업 순서/배분 근거).`,
   },
