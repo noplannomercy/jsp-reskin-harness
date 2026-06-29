@@ -40,6 +40,7 @@
 | `workflows/recon-request-template.md` | ① 구조 정찰 자연어 템플릿(원본) |
 | `workflows/recon-legacy-jsp.js` | ① 정찰 실행형(파생, 런타임 미검증) |
 | `workflows/grafting-fanout-structure.md` | ② grafting 팬아웃 구조+I/O 배관 |
+| `workflows/grafting-legacy-jsp.js` | ② grafting 팬아웃 실행형(파생, jsp-sample 드라이런 검증) |
 | `src/` | 레거시 원본 (READ-ONLY, 소스 도착 시) |
 | `deliverables/` | 납품물 — `mapping.csv` + `pXX.html` (소스 도착 시) |
 | `recon/` | 정찰 산출 `recon-report.json` |

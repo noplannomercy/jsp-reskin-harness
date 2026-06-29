@@ -98,10 +98,15 @@ C chrome     recon + deliverables + src/chrome      → work/(입힌 chrome)
 
 ---
 
-## 이 구조 → 실행형(.js) 매핑 (나중)
+## 이 구조 → 실행형(.js) 매핑 — 구현됨: `grafting-legacy-jsp.js`
 
-- Tier 1 = `pipeline(pages, 인벤토리, grafting, review)` 또는 `parallel`
-- barrier = Tier 1 pass/fail 분기
-- Tier 2 = clean 페이지 순차 /qa (단일앱 직렬)
-- 취합 = 리포트 합성 agent
+- Tier 1 = `pipeline(pages, graft, review)` (인벤토리는 graft 에이전트에 흡수 — 어차피 Read해야 graft 가능)
+- barrier = Tier 1 pass/fail 분기 (현재 pipeline이라 페이지 독립, barrier 없음)
+- Tier 2 = clean 페이지 순차 /qa (단일앱 직렬) — `args.appBootable=false`면 보류
+- 취합 = 리포트 합성 agent → `reports/wbs-report.md` + `pages/*.json`
+
+> jsp-sample 드라이런 검증 교훈(하네스 진화):
+> - **args는 JSON 문자열로 도착할 수 있다** → 스크립트 진입부에서 방어파싱(`typeof args === 'string'` → `JSON.parse`). 입력 비면 즉시 throw(조용한 헛돌기 방지).
+> - **chrome 경계 누락이 1순위 grafting 버그** → graft 프롬프트에 "페이지는 컨테이너 내부 조각만, `<main>`/컨테이너 재감싸기 금지" 명시 + review에 `chromeBoundaryOk` 검사. (안 넣으면 페이지가 chrome 소유 `<main>`을 중복으로 열어 중첩 무효 HTML — 병렬 에이전트 간 출력 불일치로 발현)
+> - **recon decisions는 `args.reconDecisions`로 인라인 주입** — 경로참조+에이전트 Read는 누락 위험. recon이 모든 에이전트 컨텍스트에 보장돼야 grafting이 진실원천을 따른다.
 - 사람 게이트 = 워크플로우 return(푸시 전), 메인루프에서 사람 확인

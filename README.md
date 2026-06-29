@@ -43,6 +43,7 @@
 | [`workflows/recon-request-template.md`](workflows/recon-request-template.md) | ① 구조 정찰 자연어 템플릿(원본) |
 | [`workflows/recon-legacy-jsp.js`](workflows/recon-legacy-jsp.js) | ① 정찰 실행형(dynamic workflow, 파생) |
 | [`workflows/grafting-fanout-structure.md`](workflows/grafting-fanout-structure.md) | ② grafting 팬아웃 구조 + I/O 배관 |
+| [`workflows/grafting-legacy-jsp.js`](workflows/grafting-legacy-jsp.js) | ② grafting 팬아웃 실행형(dynamic workflow, 파생) |
 
 ## 쓰는 법
 
