@@ -10,8 +10,14 @@ export const meta = {
 // ── 입력 ──────────────────────────────────────────────
 // args.sourcePath : 레거시 소스 루트 (필수, 소스 도착 시 주입)
 // args.targetPages: 옷입힐 대상 JSP 목록 (선택 — 업체 매핑 오면 주입)
-const SRC = (args && args.sourcePath) || '.'
-const TARGETS = (args && args.targetPages) || null
+// args는 객체로 오는 게 정상이나, 런타임에 따라 JSON 문자열로 도착할 수 있어 둘 다 흡수.
+const A = (() => {
+  if (args == null) return {}
+  if (typeof args === 'string') { try { return JSON.parse(args) } catch (e) { return {} } }
+  return args
+})()
+const SRC = A.sourcePath || '.'
+const TARGETS = A.targetPages || null
 
 const COMMON = `
 READ-ONLY 구조 정찰. 대상: 레거시 JSP 웹앱, 경로 = ${SRC}
@@ -242,10 +248,10 @@ JSP 옷입히기(grafting) 작업이 바로 참조할 "구조 정찰 리포트 +
 - perPageRisk: 페이지별 난이도 + grafting 시 조심할 점.
 - openQuestions: 소스만으론 못 정한 것(매핑/타겟브라우저 등) — 사람 확인용.
 
-★저장: 구조화 출력으로 반환하기 전에, Write 도구로 산출을 파일로 남겨라.
-  - recon/recon-report.json  ← 통합 결과(JSON 전체)
-  - recon/recon-report.md    ← reportMarkdown (사람이 읽는 통합 리포트)
-  (이 정찰만 READ-ONLY 예외 — src/는 절대 안 건드리고, recon/ 에만 쓴다.)
+★저장: 구조화 출력으로 반환하기 전에, Write 도구로 산출을 아래 절대경로에 남겨라(상대경로 금지 — cwd가 소스 루트가 아닐 수 있음).
+  - ${SRC}/recon/recon-report.json  ← 통합 결과(JSON 전체)
+  - ${SRC}/recon/recon-report.md    ← reportMarkdown (사람이 읽는 통합 리포트)
+  (이 정찰만 READ-ONLY 예외 — src/는 절대 안 건드리고, ${SRC}/recon/ 에만 쓴다.)
 
 렌즈 결과:
 ${JSON.stringify(ok, null, 2)}`,
