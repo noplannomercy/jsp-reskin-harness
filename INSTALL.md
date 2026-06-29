@@ -31,7 +31,8 @@
 
 ```text
 # Claude Code 안에서
-/plugin            # 마켓플레이스에서 gstack, context7 설치
+/plugin            # 마켓플레이스에서 gstack 설치
+                   # context7는 MCP — .mcp.json에 등록 (아래 참고)
 ```
 
 > 설치 방식은 환경마다 다름(글로벌 vs vendored). **이미 세팅된 본인 환경과 동일하게** 깔면 됨.

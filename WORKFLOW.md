@@ -48,12 +48,15 @@ C. 공통 chrome 1회  정찰의 'chrome 선처리 대상'(헤더/푸터/메뉴)
 1.5 바인딩 인벤토리  이 페이지에서 보존할 동적요소 목록화:
                    EL / JSTL / 스크립틀릿 변수 / 커스텀태그 / include / form action
                    (정찰의 '보존필수 태그' + 페이지 리스크 참조)
+                   → reports/pages/<p>.json 에 인벤토리 기록 (진척 복원 + WBS 취합 입력 — 세션 끊겨도 어디까지 했는지 남김)
 2.  context7        ← 막힐 때만. JSTL 버전별 문법 다름, 정확본 확인
 3.  grafting        정적 마크업 → 납품 마크업 교체 + 1.5의 바인딩 재주입 (계약 준수)
 4.  로컬 반영 → 빌드 OK?   NO → 3으로
 5.  /review         1.5 인벤토리를 기준으로 보존 검증 (fail-fast: 바인딩 빠짐/목업 잔존)
+                   → reports/pages/<p>.json 에 정적검증 결과(pass/fail+diff) 기록
 6.  /qa + /browse   렌더·시각일치·반응형·동적데이터 (아래 '검증 기준')
-7.  WBS 리포트 갱신  그 페이지 레코드 채움
+                   → reports/pages/<p>.json 에 UI검증 결과 기록 + 스샷 reports/screenshots/
+7.  WBS 리포트 갱신  pages/*.json 취합 → reports/wbs-report.md 그 페이지 레코드 채움
 8.  분기            clean → 브랜치 커밋  |  flagged → 보류·리포트
 ```
 
@@ -95,7 +98,7 @@ C. 공통 chrome 1회  정찰의 'chrome 선처리 대상'(헤더/푸터/메뉴)
 ```
 clean   = /review pass AND /qa pass(①~④)   → feature 브랜치 커밋
 flagged = 둘 중 하나라도 fail               → 보류, 리포트에 사유 기록
-                                              사람이 수정 → 5번(/review)부터 재진입
+                                              사람이 수정 → 원본(1.5)부터 재진입 (원본 불가침 — 그래프트 덧수정 금지)
 ```
 
 > flagged 몇 개 때문에 clean 페이지를 묶어두지 말 것 — clean은 개별로 흘려보냄.
