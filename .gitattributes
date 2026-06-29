@@ -1,0 +1,3 @@
+# Workflow 동적 스크립트는 LF 강제.
+# CRLF(\r)가 섞이면 Workflow 권한 검증기가 제어문자로 보고 스크립트 로드를 거부함.
+*.js text eol=lf
